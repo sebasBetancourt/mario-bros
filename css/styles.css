@@ -1,6 +1,25 @@
+
+
+
 body{
     display: grid;
     height: 100vh;
     background: black;
     padding-top: 5px;
+    overflow-y: hidden;
+}
+.divLost {
+    position: absolute;
+    text-align: center;
+}
+
+#lostContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Para centrar en la pantalla completa */
+}
+h1{
+    color: aqua;
 }
