@@ -1,4 +1,4 @@
-
+@import url(variable.css);
 
 
 body{
@@ -8,18 +8,41 @@ body{
     padding-top: 5px;
     overflow-y: hidden;
 }
-.divLost {
-    position: absolute;
-    text-align: center;
+
+.game{
+    width: 100vw;
+}
+.game canvas{
+    width: 100%;
 }
 
-#lostContainer {
-    width: 100%;
+.menuGameOver{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-2);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;  /* Para centrar en la pantalla completa */
+    text-align: center;
+    color: var(--font-color-1);
+    font-family: "SuperMario";
+    font-size: 3rem;
 }
-h1{
-    color: aqua;
+.playAgain{
+    width: 15%;
+    height: 10%;
+    background: var(--color-1);
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+    justify-items: center;
+    color: var(--font-color-1);
+    font-family: "SuperMario";
+    font-size: 1.3rem;
+    border-radius: 20px;
 }

@@ -1,10 +1,11 @@
 import { createAnimations } from "./animations.js";
+import { showMenuGameOver } from "./gameOver.js";
 
 
 export const configuration = () => {
     const config = {
         type: Phaser.AUTO,
-        width: 256,
+        
         height: 244,
         backgroundColor: '#049cd8',
         parent: 'game',
@@ -104,47 +105,46 @@ export const configuration = () => {
     }
 
 
-    function update () {
+    function update() {
         if (this.entities.mario.isDead) {
-            let main = document.getElementById("main")
-            main.innerHTML = `<h1>HOLA PERDISTE</h1>`
-    
-    
             return;
         }
-
-        
+    
         if (this.keys.left.isDown) {
-            this.entities.mario.anims.play('mario-walk', true)
-            this.entities.mario.x -= 2
-            this.entities.mario.flipX = true
+            this.entities.mario.anims.play('mario-walk', true);
+            this.entities.mario.x -= 2;
+            this.entities.mario.flipX = true;
+        } else if (this.keys.right.isDown) {
+            this.entities.mario.anims.play('mario-walk', true);
+            this.entities.mario.x += 2;
+            this.entities.mario.flipX = false;
+        } else {
+            this.entities.mario.anims.play('mario-idle', true);
         }
-        else if(this.keys.right.isDown) {
-            this.entities.mario.anims.play('mario-walk', true)
-            this.entities.mario.x += 2
-            this.entities.mario.flipX = false
+    
+        if (this.keys.up.isDown && this.entities.mario.body.touching.down) {
+            this.entities.mario.setVelocityY(-300);
+            this.entities.mario.anims.play('mario-jump', true);
         }
-        else{
-            this.entities.mario.anims.play('mario-idle', true)
-        }
-
-        if (this.keys.up.isDown && this.entities.mario.body.touching.down) 
-        {
-            this.entities.mario.setVelocityY(-300)
-            this.entities.mario.anims.play('mario-jump', true)
-        }
+    
         if (this.entities.mario.y >= config.height) {
-            this.entities.mario.isDead = true
-            this.entities.mario.anims.play('mario-dead')
-            this.entities.mario.setCollideWorldBounds(false)
-            this.sound.add('gameover', { volume: 0.4}).play()
-
-            setTimeout(()=> {
-                this.entities.mario.setVelocityY(-400)
-            }, 100)
-            setTimeout(()=> {
-                this.scene.restart()
-            }, 8000)
+            this.entities.mario.isDead = true;
+            this.entities.mario.anims.play('mario-dead');
+            this.entities.mario.setCollideWorldBounds(false);
+            this.sound.add('gameover', { volume: 2 }).play();
+    
+            setTimeout(() => {
+                this.entities.mario.setVelocityY(-400);
+            }, 100);
+    
+            // setTimeout(() => {
+            //     this.entities.mario.setVelocityY(0);
+            // }, 2000);
+    
+            setTimeout(() => {
+                showMenuGameOver(this);
+            }, 3000);
         }
     }
+    
 };

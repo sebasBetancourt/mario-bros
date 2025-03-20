@@ -1,0 +1,17 @@
+:root{
+    --color-1: #065384;
+    --color-2: rgba(125, 13, 22, 0.74);
+    --color-3: #A60F1B;
+
+    --font-color-1: #fff;
+}
+
+@font-face {
+    font-family: "SuperMario";
+    src: url(../assets/fonts/SuperMario.ttf);
+}
+
+@font-face {
+    font-family: "SuperPlumberBrothers";
+    src: url(../assets/fonts/SuperPlumberBrothers.ttf);
+}
