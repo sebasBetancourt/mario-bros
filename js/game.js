@@ -2,11 +2,14 @@ import { createAnimations } from "./animations.js";
 import { showMenuGameOver } from "./gameOver.js";
 
 
+let screenWidth = screen.width
+let screenHeight = screen.height
+
 export const configuration = () => {
     const config = {
         type: Phaser.AUTO,
-        
-        height: 244,
+        width: screenWidth,
+        height: screenHeight,
         backgroundColor: '#049cd8',
         parent: 'game',
         physics: {
@@ -72,18 +75,18 @@ export const configuration = () => {
         this.floor = this.physics.add.staticGroup()
         
         this.floor
-            .create(0, config.height - 16, 'floorbricks')
+            .create(0, config.height - 19, 'floorbricks')
             .setOrigin(0, 0.5)
             .refreshBody()
 
 
         this.floor
-            .create(100, config.height - 16, 'floorbricks')
+            .create(100, config.height - 19, 'floorbricks')
             .setOrigin(0, 0.5)
             .refreshBody()
 
         this.floor
-            .create(290, config.height - 16, 'floorbricks')
+            .create(290, config.height - 450, 'floorbricks')
             .setOrigin(0, 0.5)
             .refreshBody()
 
@@ -110,7 +113,7 @@ export const configuration = () => {
             return;
         }
     
-        if (this.keys.left.isDown) {
+        if (this.keys.space.isDown) {
             this.entities.mario.anims.play('mario-walk', true);
             this.entities.mario.x -= 2;
             this.entities.mario.flipX = true;
