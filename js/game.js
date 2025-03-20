@@ -2,14 +2,18 @@ import { createAnimations } from "./animations.js";
 import { showMenuGameOver } from "./gameOver.js";
 
 
-let screenWidth = screen.width
-let screenHeight = screen.height
+let screenWidth = window.innerWidth
+let screenHeight = window.innerHeight
 
 export const configuration = () => {
     const config = {
         type: Phaser.AUTO,
         width: screenWidth,
         height: screenHeight,
+        scale: {
+            mode: Phaser.Scale.RESIZE, // Hace que el canvas cambie con la pantalla
+            autoCenter: Phaser.Scale.CENTER_BOTH, // Centra el juego
+        },
         backgroundColor: '#049cd8',
         parent: 'game',
         physics: {
@@ -26,7 +30,7 @@ export const configuration = () => {
         }
     }
 
-    new Phaser.Game(config)
+    const game = new Phaser.Game(config)
 
     function preload () {
         this.load.image(
@@ -67,26 +71,26 @@ export const configuration = () => {
             //     .setOrigin(0, 1)
         }
 
-        this.add.image(100, 50, 'cloud1')
+        this.add.image((config.width / 2), config.height / 2, 'cloud1')
             .setOrigin(0, 0)
-            .setScale(0.15)
+            .setScale(0.3)
 
         
         this.floor = this.physics.add.staticGroup()
         
         this.floor
-            .create(0, config.height - 19, 'floorbricks')
+            .create(0, config.height / 1.04, 'floorbricks')
             .setOrigin(0, 0.5)
             .refreshBody()
 
 
         this.floor
-            .create(100, config.height - 19, 'floorbricks')
+            .create(100, config.height / 1.04, 'floorbricks')
             .setOrigin(0, 0.5)
             .refreshBody()
 
         this.floor
-            .create(290, config.height - 450, 'floorbricks')
+            .create(290, config.height / 1.04, 'floorbricks')
             .setOrigin(0, 0.5)
             .refreshBody()
 
@@ -104,6 +108,7 @@ export const configuration = () => {
         // .setScale(0.3)
 
 
+
         this.keys = this.input.keyboard.createCursorKeys()
     }
 
@@ -113,7 +118,7 @@ export const configuration = () => {
             return;
         }
     
-        if (this.keys.space.isDown) {
+        if (this.keys.left.isDown) {
             this.entities.mario.anims.play('mario-walk', true);
             this.entities.mario.x -= 2;
             this.entities.mario.flipX = true;

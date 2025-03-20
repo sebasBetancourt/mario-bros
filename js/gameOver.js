@@ -6,7 +6,7 @@ export const showMenuGameOver = (scene) => {
         gameOverMenu.classList.add("menuGameOver");
     
         gameOverMenu.innerHTML = `
-            <h3>Game Over</h3>
+            <h3>Game Over ${screen.width}</h3>
             <button id="restart-btn" class="playAgain"
             ">Play Again</button>
         `;
